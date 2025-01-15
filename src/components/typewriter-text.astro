@@ -1,0 +1,91 @@
+---
+export interface Props {
+    text: string;
+    style?: "primary" | "secondary";
+}
+const { text, style } = Astro.props;
+const classes = ["typewriter-text", style && style];
+---
+
+<div class="typewriter-wrapper">
+    <span class:list={classes}>{text}<span class="cursor"></span></span>
+</div>
+
+<style
+    define:vars={{
+        textLength: text.length,
+        textWidth: `${text.length * 26.8833}px`,
+    }}
+>
+    .typewriter-wrapper {
+        min-width: calc(var(--textWidth) + 7px);
+    }
+    .typewriter-text {
+        --typewriter-blink-color: rgba(255, 255, 255, 0.75);
+
+        display: block;
+        position: relative;
+        box-sizing: content-box;
+        padding-right: 2px;
+        font-family: var(--mono-font-family);
+        width: var(--textWidth);
+        border-right: 5px solid var(--typewriter-blink-color);
+        font-size: 2.8em;
+        font-weight: 650;
+        white-space: nowrap;
+        overflow: hidden;
+        line-height: 1.2em;
+        animation:
+            typewriter 2s steps(var(--textLength)) 0.8s 1 normal both,
+            blinkTextCursor 700ms steps(var(--textLength)) infinite normal;
+    }
+
+    @media screen and (max-width: 600px) {
+        .typewriter-wrapper {
+            min-width: 0;
+        }
+        .typewriter-text {
+            animation: none;
+            white-space: wrap;
+            width: auto;
+            border: none;
+            padding: 0;
+        }
+        .typewriter-text .cursor {
+            width: 5px;
+            height: 1.2em;
+            border-right: 5px solid var(--typewriter-blink-color);
+            display: inline-block;
+            margin: -0.2em 0;
+            padding-right: 2px;
+            animation: blinkTextCursor 500ms steps(var(--textLength)) infinite
+                normal;
+        }
+    }
+
+    .primary {
+        color: var(--color-primary);
+        --typewriter-blink-color: rgba(var(--color-primary-hex), 0.75);
+    }
+    .secondary {
+        color: var(--color-secondary);
+        --typewriter-blink-color: rgba(var(--color-secondary-hex), 0.75);
+    }
+
+    @keyframes typewriter {
+        from {
+            width: 0;
+        }
+        to {
+            width: var(--textWidth);
+        }
+    }
+    @keyframes blinkTextCursor {
+        from {
+            border-right-color: var(--typewriter-blink-color);
+        }
+        to {
+            border-right-color: transparent;
+        }
+    }
+</style>

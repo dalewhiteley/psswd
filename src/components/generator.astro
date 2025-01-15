@@ -1,0 +1,57 @@
+---
+import Button from "./button.astro";
+import Password from "./password.astro";
+import TypewriterText from "./typewriter-text.astro";
+---
+
+<div>
+    <TypewriterText text="Need a new password?" style="primary" />
+    <h2>Generate a strong and memorable one.</h2>
+    <Password />
+    <Button type="primary" name="regeneratePassword">
+        New password
+        <i class="ph">arrows-clockwise</i>
+        <script>
+            import { generatePassword } from "../lib/password";
+            import { $password } from "../lib/stores/password";
+
+            document
+                .querySelectorAll<HTMLButtonElement>(
+                    'button[name="regeneratePassword"]',
+                )
+                .forEach((button) => {
+                    button.addEventListener("click", (e) => {
+                        $password.set(generatePassword());
+                    });
+                });
+        </script>
+    </Button>
+</div>
+
+<style>
+    div {
+        padding: 1em;
+        border-radius: 0.3em;
+        display: flex;
+        gap: 1em;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    h1 {
+        color: var(--color-primary);
+        font-size: 3em;
+        line-height: 1em;
+        font-weight: 700;
+    }
+    h2 {
+        color: var(--color-white);
+        font-weight: 450;
+    }
+
+    @media screen and (max-width: 600px) {
+        div {
+            align-items: center;
+            text-align: center;
+        }
+    }
+</style>

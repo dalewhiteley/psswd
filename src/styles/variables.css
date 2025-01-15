@@ -1,0 +1,13 @@
+:root {
+    --font-family: 'Open Sans Variable', sans-serif;
+    --color-primary: #049DD9;
+    --color-primary-hex: 4, 157, 217;
+    --color-secondary: #051F40;
+    --color-secondary-hex: 4, 157, 217;
+    --color-white: #FCFCFC;
+    --color-black: #111111;
+
+    --color-base: var(--color-secondary);
+    --color-base-hex: var(--color-secondary-hex);
+    --mono-font-family: 'Roboto Mono Variable', monospace;
+}

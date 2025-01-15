@@ -1,0 +1,41 @@
+---
+export interface Props {
+    name: string;
+    icon: string;
+    type?: "primary" | "secondary" | "button";
+}
+const { name, icon, type } = Astro.props;
+
+const buttonClasses = [];
+if (type && type !== "button") {
+    buttonClasses.push(type);
+}
+---
+
+<button class:list={buttonClasses} role="button" name={name}>
+    <i class=`ph`>{icon}</i>
+    <slot />
+</button>
+
+<style>
+    button {
+        border: none;
+        outline: none;
+        background: transparent;
+        padding: 0 0.5em 0;
+        display: flex;
+        align-items: center;
+        color: inherit;
+    }
+    i {
+        white-space: nowrap;
+        font-size: 2em;
+        cursor: pointer;
+    }
+    .primary {
+        background-color: var(--color-primary);
+    }
+    .secondary {
+        background-color: var(--color-secondary);
+    }
+</style>

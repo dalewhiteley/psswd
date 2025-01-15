@@ -1,3 +1,21 @@
+---
+import "../styles/reset.css";
+import "@fontsource-variable/open-sans";
+import "@fontsource-variable/roboto-mono";
+import "@phosphor-icons/web/regular";
+import "../styles/base.css";
+export type Props = {
+	title?: string;
+};
+
+const { title } = Astro.props;
+
+let pageTitle = "psswd";
+if (title) {
+	pageTitle = `${title} | ${pageTitle}`;
+}
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -5,10 +23,12 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{pageTitle}</title>
 	</head>
 	<body>
-		<slot />
+		<section>
+			<slot />
+		</section>
 	</body>
 </html>
 
@@ -18,5 +38,13 @@
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+	section {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		min-height: 100vh;
+		padding: 1em 2em;
 	}
 </style>
