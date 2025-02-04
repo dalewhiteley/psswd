@@ -1,0 +1,34 @@
+---
+import { Image } from "astro:assets";
+import Kofi from "./kofi.gif";
+
+const kofiUsername = import.meta.env.KOFI_USER;
+---
+
+<a href={`https://ko-fi.com/${kofiUsername}`} target="_blank"
+    >If you found this useful, please consider supporting me. <Image
+        class="kofi-logo"
+        src={Kofi}
+        alt="Ko-fi's logo, a heart decorated coffee mug with an animated rainbow shadow."
+        width={30}
+        height={30}
+    /></a
+>
+
+<style>
+    a {
+        gap: 0.5em;
+
+        /* text-decoration: none; */
+        color: inherit;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+    a:before {
+        bottom: 12px;
+    }
+    .kofi-logo {
+        margin-bottom: -10px;
+        display: inline-block;
+    }
+</style>

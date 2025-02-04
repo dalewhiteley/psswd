@@ -4,6 +4,8 @@ import "@fontsource-variable/open-sans";
 import "@fontsource-variable/roboto-mono";
 import "@phosphor-icons/web/regular";
 import "../styles/base.css";
+import Footer from "./Footer.astro";
+import KoFi from "../components/ko-fi.astro";
 export type Props = {
 	title?: string;
 };
@@ -28,6 +30,7 @@ if (title) {
 	<body>
 		<section>
 			<slot />
+			<Footer />
 		</section>
 	</body>
 </html>
@@ -40,11 +43,12 @@ if (title) {
 		height: 100%;
 	}
 	section {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		justify-content: center;
+		display: grid;
+		grid-template-rows: 1fr;
+		justify-items: start;
+		align-items: center;
+		gap: 1em;
 		min-height: 100vh;
-		padding: 1em 2em;
+		padding: 0 2em;
 	}
 </style>

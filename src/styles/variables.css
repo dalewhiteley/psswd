@@ -1,11 +1,13 @@
 :root {
     --font-family: 'Open Sans Variable', sans-serif;
-    --color-primary: #049DD9;
-    --color-primary-hex: 4, 157, 217;
-    --color-secondary: #051F40;
-    --color-secondary-hex: 4, 157, 217;
     --color-white: #FCFCFC;
     --color-black: #111111;
+    --color-secondary: var(--color-black);
+    --color-secondary-hex: 17, 17, 17;
+    --color-primary: var(--color-white);
+    --color-primary-hex: 252, 252, 252;
+    --color-subtle: #05326b;
+    --color-subtle-hex: #05326b;
 
     --color-base: var(--color-secondary);
     --color-base-hex: var(--color-secondary-hex);

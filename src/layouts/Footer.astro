@@ -1,0 +1,22 @@
+---
+import KoFi from "../components/ko-fi.astro";
+---
+
+<footer>
+    <a href="https://xkcd.com/936/" target="_blank">Inspired by XKCD</a>
+    <KoFi />
+</footer>
+
+<style>
+    footer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 0.2em;
+
+        color: var(--color-primary);
+    }
+</style>

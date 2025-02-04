@@ -10,3 +10,18 @@ body {
     background: rgba(var(--color-primary-hex), 0.7);
     color: var(--color-white);
 }
+
+
+a {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all .1s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    transform: translateY(-3px);
+}
