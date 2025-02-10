@@ -3,10 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
     "build": "astro build",
+    "dev": "sst dev",
+    "astro:dev": "astro dev",
     "preview": "astro preview",
-    "astro": "astro"
+    "aws": "aws sts get-caller-identity"
   },
   "dependencies": {
     "@fontsource-variable/open-sans": "^5.1.1",
@@ -15,7 +16,8 @@
     "adjectives": "^1.0.2",
     "astro": "^5.0.5",
     "nanostores": "^0.11.3",
-    "nouns": "^1.0.1"
+    "nouns": "^1.0.1",
+    "sst": "3.8.2"
   },
   "packageManager": "yarn@4.6.0"
 }
