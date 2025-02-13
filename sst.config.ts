@@ -11,8 +11,8 @@ export default $config({
   },
   async run() {
 
-    const devHostedZone = new sst.Secret("HostedZone");
-    const kofiUser = new sst.Secret('KofiUser');
+    const hostedZone = process.env.HOSTED_ZONE || '';
+    const kofiUser = process.env.KOFI_USER || '';
 
     const domainName = $app.stage === "production"
       ? `${process.env.DOMAIN_NAME}`
@@ -22,7 +22,7 @@ export default $config({
       domain: {
         name: domainName,
         dns: sst.aws.dns({
-          zone: devHostedZone.value
+          zone: hostedZone
         })
       },
       build: {
@@ -30,7 +30,7 @@ export default $config({
         output: "dist"
       },
       environment: {
-        KOFI_USER: kofiUser.value
+        KOFI_USER: kofiUser
       },
       dev: {
         command: "yarn astro:dev"
