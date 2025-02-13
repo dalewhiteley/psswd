@@ -9,6 +9,6 @@
              repeatCount="4"/>
     </rect>
     <style>
-        path, rect { fill: #049DD9; }
+        path, rect { fill: #111111; }
     </style>
 </svg>
