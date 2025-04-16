@@ -31,14 +31,14 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: eu-west-2
+          aws-region: eu-west-1
           role-duration-seconds: 1200
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
       - name: get caller identity
         run: |
-          aws sts get-caller-identity
+          echo stage: '${{ vars.STAGE }}' | KOFI_USER: ${{ vars.KOFI_USER }} | HOSTED_ZONE: ${{ vars.HOSTED_ZONE }} | DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
       # - name: Deploy with SST
-      #   run: yarn sst deploy --stage production
+      #   run: yarn sst deploy --stage ${{ vars.STAGE }}
       #   env:
       #     KOFI_USER: ${{ vars.KOFI_USER }}
       #     HOSTED_ZONE: ${{ vars.HOSTED_ZONE }}
