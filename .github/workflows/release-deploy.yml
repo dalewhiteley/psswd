@@ -1,8 +1,9 @@
 name: Deploy Psswd
 on:
-  release:
-    types:
-      - released
+  # release:
+  #     types:
+  #       - released
+  workflow_dispatch:
 jobs:
   build:
     name: Build
@@ -21,9 +22,18 @@ jobs:
           cache-dependency-path: 'yarn.lock'
       - name: Install dependencies
         run: yarn
-      - name: Deploy with SST
-        run: yarn sst deploy --stage production
-        env:
-          KOFI_USER: ${{ vars.KOFI_USER }}
-          HOSTED_ZONE: ${{ vars.KOFI_USER }}
-          DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: eu-west-1
+          role-duration-seconds: 1200
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+      - name: get caller identity
+        run: |
+          aws sts get-caller-identity
+      # - name: Deploy with SST
+      #   run: yarn sst deploy --stage production
+      #   env:
+      #     KOFI_USER: ${{ vars.KOFI_USER }}
+      #     HOSTED_ZONE: ${{ vars.HOSTED_ZONE }}
+      #     DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
