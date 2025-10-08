@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
-      name: preview
+      name: Development
 
     permissions:
       id-token: write
