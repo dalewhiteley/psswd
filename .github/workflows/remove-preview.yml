@@ -1,14 +1,14 @@
-name: Release Deploy
+name: Remove Preview
 
 on:
-  release:
-    types: [published]
+  pull_request:
+    types: [closed]
 
 jobs:
-  deploy-production:
+  remove-preview:
     runs-on: ubuntu-latest
     environment:
-      name: production
+      name: preview
 
     steps:
       - name: Checkout code
@@ -33,10 +33,7 @@ jobs:
           aws-region: eu-west-1
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
 
-      - name: Deploy Production
+      - name: Remove PR stage
         run: |
-          yarn sst deploy --stage production
-        env:
-          KOFI_USER: ${{ vars.KOFI_USER }}
-          HOSTED_ZONE: ${{ vars.HOSTED_ZONE }}
-          DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
+          STAGE=pr-${{ github.event.pull_request.number }}
+          yarn sst remove --stage $STAGE
