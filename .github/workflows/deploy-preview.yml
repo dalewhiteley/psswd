@@ -43,8 +43,17 @@ jobs:
         run: |
           STAGE=pr-${{ github.event.pull_request.number }}
           DOMAIN=${{ vars.DOMAIN_NAME }}
+
           yarn sst deploy --stage $STAGE
-          echo "PREVIEW_URL=https://$STAGE.$DOMAIN" >> $GITHUB_ENV
+
+          if [[ "$STAGE" == "development" || "$STAGE" == "testing" ]]; then
+            PREVIEW_URL="https://$STAGE.$DOMAIN"
+          else
+            PREVIEW_URL="https://$STAGE.development.$DOMAIN"
+          fi
+          
+          echo "STAGE=$STAGE" >> $GITHUB_ENV
+          echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
         env:
           KOFI_USER: ${{ vars.KOFI_USER }}
           HOSTED_ZONE: ${{ vars.HOSTED_ZONE }}
