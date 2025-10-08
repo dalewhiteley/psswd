@@ -1,0 +1,44 @@
+name: Remove Preview
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  remove-preview:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: preview
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
+      - name: Remove PR stage
+        run: |
+          STAGE=pr-${{ github.event.pull_request.number }}
+          yarn sst remove --stage $STAGE

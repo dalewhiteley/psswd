@@ -1,0 +1,47 @@
+name: Release Deploy
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: production
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+          cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: eu-west-1
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
+      - name: Deploy Production
+        run: |
+          yarn sst deploy --stage production
+        env:
+          KOFI_USER: ${{ vars.KOFI_USER }}
+          HOSTED_ZONE: ${{ vars.HOSTED_ZONE }}
+          DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}

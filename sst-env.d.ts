@@ -5,18 +5,6 @@
 
 declare module "sst" {
   export interface Resource {
-    "HostedZone": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "KofiUser": {
-      "type": "sst.sst.Secret"
-      "value": string
-    }
-    "PsswdWeb": {
-      "type": "sst.aws.StaticSite"
-      "url": string
-    }
   }
 }
 /// <reference path="sst-env.d.ts" />
