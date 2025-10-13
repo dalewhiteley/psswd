@@ -5,7 +5,10 @@ import Kofi from "./kofi.gif";
 const kofiUsername = import.meta.env.KOFI_USER;
 ---
 
-<a href={`https://ko-fi.com/${kofiUsername}`} target="_blank"
+<a
+    href={`https://ko-fi.com/${kofiUsername}`}
+    target="_blank"
+    data-s-event="Ko-fi click"
     >If you found this useful, please consider supporting me. <Image
         class="kofi-logo"
         src={Kofi}
