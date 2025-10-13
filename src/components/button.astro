@@ -13,7 +13,7 @@ if (type && type !== "button") {
 }
 ---
 
-<button class:list={buttonClasses} {name}>
+<button class:list={buttonClasses} {name} data-s-event=`Button ${name} click`>
     <slot />
 </button>
 
